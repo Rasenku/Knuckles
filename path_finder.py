@@ -3,9 +3,19 @@ import math
 from tkinter import *
 from tkinter import messagebox
 import pygame
+import pygame
+import sys
+import math
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox
 import os
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
+fig = plt.figure()
 
-screen = pygame.display.set_mode((400, 400))
+screen = pygame.display.set_mode((800, 800))
 
 class spot:
     def __init__(self, x, y):
