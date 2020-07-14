@@ -1,21 +1,9 @@
-try:
-    import pygame
-    import sys
-    import math
-    from tkinter import *
-    from tkinter import ttk
-    from tkinter import messagebox
-    import os
-except:
-    import install_requirements  # install packages
-
-    import pygame
-    import sys
-    import math
-    from tkinter import *
-    from tkinter import ttk
-    from tkinter import messagebox
-    import os
+import sys
+import math
+from tkinter import *
+from tkinter import messagebox
+import pygame
+import os
 
 screen = pygame.display.set_mode((400, 400))
 
