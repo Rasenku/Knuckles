@@ -2,13 +2,9 @@
 import sys
 import math
 from tkinter import *
-from tkinter import messagebox
-import pygame
-import sys
-import math
-from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+import pygame
 import os
 import matplotlib
 matplotlib.use('TkAgg')
