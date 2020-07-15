@@ -1,8 +1,8 @@
+# Imports our needed libraries
 import sys
 import math
 from tkinter import *
 from tkinter import messagebox
-import pygame
 import pygame
 import sys
 import math
@@ -15,8 +15,10 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 fig = plt.figure()
 
+# makes our pygame display the same size as our grid
 screen = pygame.display.set_mode((800, 800))
 
+# class for end and start points
 class spot:
     def __init__(self, x, y):
         self.i = x
@@ -31,7 +33,7 @@ class spot:
         self.value = 1
 
     def show(self, color, st):
-        if self.closed == False :
+        if self.closed == False:
             pygame.draw.rect(screen, color, (self.i * w, self.j * h, w, h), st)
             pygame.display.update()
 
@@ -74,14 +76,14 @@ for i in range(cols):
     for j in range(row):
         grid[i][j] = spot(i, j)
 
-
 # Set start and end node
 start = grid[12][5]
 end = grid[3][6]
-# SHOW RECT
+
+# creates our rectangles
 for i in range(cols):
     for j in range(row):
-        grid[i][j].show((255, 255, 255), 1)
+        grid[i][j].show((255, 0, 255), 1)
 
 for i in range(0,row):
     grid[0][i].show(grey, 0)
@@ -126,6 +128,7 @@ mainloop()
 pygame.init()
 openSet.append(start)
 
+# draws our obsticles 
 def mousePress(x):
     t = x[0]
     w = x[1]
@@ -136,7 +139,12 @@ def mousePress(x):
         if acess.obs == False:
             acess.obs = True
             acess.show((255, 255, 255), 0)
+        # erased obsticles, but cuased bugs
+        # elif acess.obs == True:
+        #     acess.obs = False
+        #     acess.show((0, 0, 0), 0)
 
+# sets our points colors
 end.show((255, 8, 127), 0)
 start.show((255, 8, 127), 0)
 
@@ -162,15 +170,16 @@ for i in range(cols):
     for j in range(row):
         grid[i][j].addNeighbors(grid)
 
+# heurisitic: enabling a person to discover or learn something for themselves.
 def heurisitic(n, e):
+    # two operations that help our start point find our end point
+    # d = abs(n.i - e.i) + abs(n.j - e.j)
+    # this one is just faster
     d = math.sqrt((n.i - e.i)**2 + (n.j - e.j)**2)
-    #d = abs(n.i - e.i) + abs(n.j - e.j)
     return d
 
 
-def main():
-    end.show((255, 8, 127), 0)
-    start.show((255, 8, 127), 0)
+def main(checked):
     if len(openSet) > 0:
         lowestIndex = 0
         for i in range(len(openSet)):
@@ -222,7 +231,9 @@ def main():
 
             if neighbor.previous == None:
                 neighbor.previous = current
-    if var.get():
+    # if checkbox is checked
+    if checked == 1:
+        # show attempted paths
         for i in range(len(openSet)):
             openSet[i].show(green, 0)
 
@@ -237,4 +248,4 @@ while True:
     if ev.type == pygame.QUIT:
         pygame.quit()
     pygame.display.update()
-    main()
+    main(var.get())
