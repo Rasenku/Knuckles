@@ -139,6 +139,7 @@ def mousePress(x):
         elif acess.obs == True:
             acess.obs = False
             acess.show((0, 0, 0), 0)
+            acess.show((255, 0, 255), 1)
 
 # sets our points colors
 end.show((255, 8, 127), 0)
