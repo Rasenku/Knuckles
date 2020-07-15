@@ -1,16 +1,27 @@
-import sys
-import math
-from tkinter import *
-from tkinter import messagebox
-import pygame
-import pygame
-import sys
-import math
-from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox
-import os
+
+try:
+    import pygame
+    import sys
+    import math
+    from tkinter import *
+    from tkinter import ttk
+    from tkinter import messagebox
+    import os
+except:
+    import install_requirements  # install packages
+
+    import pygame
+    import sys
+    import math
+    from tkinter import *
+    from tkinter import ttk
+    from tkinter import messagebox
+    import os
+
+import heapq
+import numpy as np
 import matplotlib
+from matplotlib.pyplot import figure
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 fig = plt.figure()
