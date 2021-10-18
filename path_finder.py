@@ -1,6 +1,7 @@
 # Imports our needed libraries
 import sys
 import math
+import time
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -13,8 +14,13 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 fig = plt.figure()
 
-# makes our pygame display the same size as our grid
-screen = pygame.display.set_mode((800, 800))
+# makes our pygame display the same size as our grid + 8 for 8bit
+screen = pygame.display.set_mode((800, 800), 8)
+screen.set_alpha(None)
+
+# sets our frame rate. Lower frame rate means faster loading times
+FPS = 12
+fpsClock = pygame.time.Clock()
 
 # class for end and start points
 class spot:
@@ -138,7 +144,8 @@ def mousePress(x):
         if acess.obs == False:
             acess.obs = True
             acess.show((255, 255, 255), 0)
-        # erased obsticles, but cuased bugs
+            time.sleep(0.05) # Makes drawing more bearable
+        # erased obsticles, but causes bugs
         elif acess.obs == True:
             acess.obs = False
             acess.show((0, 0, 0), 0)
@@ -248,3 +255,4 @@ while True:
         pygame.quit()
     pygame.display.update()
     main(var.get())
+    fpsClock.tick(FPS)
