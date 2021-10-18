@@ -1,27 +1,7 @@
-try:
-    import pygame
-    import sys
-    import math
-    from tkinter import *
-    from tkinter import ttk
-    from tkinter import messagebox
-    import os
-except:
-    import install_requirements  # install packages
-
-    import pygame
-    import sys
-    import math
-    from tkinter import *
-    from tkinter import ttk
-    from tkinter import messagebox
-    import os
-
-import heapq
-import numpy as np
 # Imports our needed libraries
 import sys
 import math
+import time
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
@@ -34,8 +14,13 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 fig = plt.figure()
 
-# makes our pygame display the same size as our grid
-screen = pygame.display.set_mode((800, 800))
+# makes our pygame display the same size as our grid + 8 for 8bit
+screen = pygame.display.set_mode((800, 800), 8)
+screen.set_alpha(None)
+
+# sets our frame rate. Lower frame rate means faster loading times
+FPS = 12
+fpsClock = pygame.time.Clock()
 
 # class for end and start points
 class spot:
@@ -127,16 +112,12 @@ def onsubmit():
 
 window = Toplevel()
 window.title("Knuckles")
-var = IntVar()
-showPath = ttk.Checkbutton(window, text='Show Steps :', onvalue=1, offvalue=1, variable=var)
-print(var.get())
 label = Label(window, text='Start(x,y): ')
 startBox = Entry(window)
 label1 = Label(window, text='End(x,y): ')
 endBox = Entry(window)
-# var = IntVar()
-# showPath = ttk.Checkbutton(window, text='Show Steps :', onvalue=1, offvalue=1, variable=var)
-# print(var.get())
+var = IntVar()
+showPath = ttk.Checkbutton(window, text='Show Steps :', onvalue=1, offvalue=0, variable=var)
 submit = Button(window, text='Submit', command=onsubmit)
 
 showPath.grid(columnspan=2, row=2)
@@ -163,11 +144,12 @@ def mousePress(x):
         if acess.obs == False:
             acess.obs = True
             acess.show((255, 255, 255), 0)
-        # erased obsticles, but cuased bugs
-        # elif acess.obs == True:
-        #     acess.obs = False
-        #     acess.show((0, 0, 0), 0)
-        #     acess.show((255, 0, 255), 1)
+            time.sleep(0.05) # Makes drawing more bearable
+        # erased obsticles, but causes bugs
+        elif acess.obs == True:
+            acess.obs = False
+            acess.show((0, 0, 0), 0)
+            acess.show((255, 0, 255), 1)
 
 # sets our points colors
 end.show((255, 8, 127), 0)
@@ -260,11 +242,11 @@ def main(checked):
     if checked == 1:
         # show attempted paths
         for i in range(len(openSet)):
-            openSet[i].show(green, 1)
+            openSet[i].show(green, 0)
 
         for i in range(len(closedSet)):
             if closedSet[i] != start:
-                closedSet[i].show(red, 1)
+                closedSet[i].show(red, 0)
     current.closed = True
 
 while True:
@@ -273,3 +255,4 @@ while True:
         pygame.quit()
     pygame.display.update()
     main(var.get())
+    fpsClock.tick(FPS)
