@@ -13,6 +13,8 @@ from matplotlib.pyplot import figure
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 fig = plt.figure()
+from flask import Flask
+app = Flask(__name__)
 
 # makes our pygame display the same size as our grid + 8 for 8bit
 screen = pygame.display.set_mode((800, 800), 8)
