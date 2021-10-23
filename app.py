@@ -1,46 +1,45 @@
-"""Flask stuff"""
-from flask import Flask, request, render_template #imports pip3 libraries
-from random import sample, choice
-import unittest
-
-app = Flask(__name__) #defines server name
-
-class tests(unittest.TestCase):
-    def tests_index_returns_template_index(self):
-        self.assertEqual(index(), render_template("index.html"))
-
-@app.route('/')
-def index(): #creates a html section inside of python3's code
-    return render_template("index.html")
-
-if __name__ == "__main__": #closes server runtime
-    unittest.main() #runs tests
-    app.run(debug=True)
+""" failed attempt to make python live """
+# from flask import Flask, request, render_template #imports pip3 libraries
+# from random import sample, choice
+# import unittest
+from p5 import *
 
 """P5 stuff"""
-# from p5 import *
+def setup():
+    size(640, 360)
+    no_stroke()
+    background(204)
 
-# bar_width = 20
-# last_bar = None
+def draw():
+    if mouse_is_pressed:
+        fill(random_uniform(255), random_uniform(127), random_uniform(51), 127)
+    else:
+        fill(255, 15)
 
-# def setup():
-#     size(640, 360)
-#     title("Brightness")
-#     color_mode('HSB', width, 100, height)
-#     no_stroke()
-#     background(0)
+    circle_size = random_uniform(low=10, high=80)
 
-# def draw():
-#     global last_bar
-#     which_bar = mouse_x // bar_width
-#     if which_bar is not last_bar:
-#         bar_x = which_bar * bar_width
-#         fill(bar_x, 100, mouse_y)
-#         rect((bar_x, 0), bar_width, height)
-#         last_bar = which_bar
+    circle((mouse_x, mouse_y), circle_size)
 
-# if __name__ == '__main__':
-#     run()
+def key_pressed(event):
+    background(204)
+
+run()
+"""Flask stuff"""
+# app = Flask(__name__) #defines server name
+
+# class tests(unittest.TestCase):
+#     def tests_index_returns_template_index(self):
+#         self.assertEqual(index(), render_template("base.html"))
+
+# @app.route('/')
+# def index(): #creates a html section inside of python3's code
+#     return render_template("base.html")
+
+# if __name__ == "__main__": #closes server runtime
+#     unittest.main() #runs tests
+#     run() # runs p5
+#     app.run(debug=True)
+
 
 """Pygame/ Tkinter stuff"""
 # # makes our pygame display the same size as our grid + 8 for 8bit
